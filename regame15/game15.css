@@ -1,0 +1,30 @@
+body {
+    background-color: orange;
+}
+.board {
+    box-sizing: border-box;
+    width: 45%;
+    padding-top: 45%;
+    height: 0;
+    border: 1px solid white;
+    position: relative;
+}
+
+.chip {
+    box-sizing: border-box;
+    width: 25%;
+    padding-top: 25%;
+    height: 0;
+    border: 1px solid yellow;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.chip__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4em;
+}

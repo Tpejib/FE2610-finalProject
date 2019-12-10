@@ -2,6 +2,7 @@
 
 class Game {
     constructor(parentElement, size = 4) {
+        this.size = size;
         let gameFieldElement = createAndAppend({
             className: 'game',
             parentElement
@@ -30,6 +31,57 @@ class Game {
                 this.field[i][k] = new Cell(fieldElement);
             }
         }
+
+        // this.fieldElement.onkeyup = function(e) {
+            
+        // };
+
         console.log(this.field);
     }
+
+    spawnUnit() {
+        let emptyCells = [];
+
+        for ( let i = 0; i < this.field.length; i++) {
+            for (let k = 0; k < this.field[i].length; k++) {
+                if (!this.field[i][k].value) {
+                    emptyCells.push(this.field[i][k]);
+                }
+            }
+        }
+        if (emptyCells.length) {
+            emptyCells[getRandomInt (0, emptyCells.length - 1)].spawn();
+        } else alert('Ты проиграл!');
+        
+
+    }
+
+    moveRight() {
+        let hasMoved = false;
+        for (let i = 0; i < this.field.length; i++) {
+            for (let k = this.field[i].length - 2; k >= 0; k--) {
+                if (this.field[i].isEmpty) {
+                    continue;
+                }
+                
+                let nextCellKey = k+1;
+                while (nextCellKey < this.size) {
+                      let nextCell = this.field[i][nextCellKey];
+                    if (!nextCell.isEmpty || (nextCellKey == (this.size - 1))) {
+                        this.field[i][nextCellKey].merge(this.field[i][k]);
+                        hasMoved = true;
+                        break;
+                    } 
+                    nextCellKey++;
+                    nextCell = this.field[i][nextCellKey];
+                }
+            }
+        }
+
+        if (hasMoved) {
+            this.spawnUnit();
+        }
+    }
 }
+
+

@@ -6,7 +6,10 @@ let createAndAppend = function({className, parentElement, value}, tag='div') {
     };
     parentElement.appendChild(element);
     return element;
-}
-  // Создание тега с классом
+}  // Создание тега с классом
 
-new Game(document.body, 4);
+let getRandomInt = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+let game = new Game(document.body, 4);

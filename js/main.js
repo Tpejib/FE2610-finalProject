@@ -1,4 +1,4 @@
-let createAndAppend = function({className, parentElement, value, tag}={className, parentElement, value, tag: 'div'}) {
+let createAndAppend = function({className, parentElement, value}, tag='div') {
     let element = document.createElement(tag);
     element.className = className;
     if (value) {
@@ -8,5 +8,5 @@ let createAndAppend = function({className, parentElement, value, tag}={className
     return element;
 }
   // Создание тега с классом
-  
+
 new Game(document.body, 4);

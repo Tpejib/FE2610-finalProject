@@ -144,4 +144,50 @@ class Game {
     isLastKey(key) {
         return key == (this.size - 1);
     }
+
+    moveDown() {
+        let hasMoved = false;
+        for (let k = 0; k < this.size; k++) {
+            for (let i = this.size - 2; i >= 0; i--) {
+                let currentCell = this.field[i][k];
+                if (currentCell.isEmpty) {
+                    continue;
+                }
+                
+                let nextCellKey = i + 1;
+                while (nextCellKey < this.size) {
+
+                      let nextCell = this.field[nextCellKey][k];
+                        if (!nextCell.isEmpty || this.isLastKey(nextCellKey)) {
+                            if ((nextCell.isEmpty && this.isLastKey(nextCellKey)) 
+                                || nextCell.isSameTo(currentCell)) {
+                                this.field[nextCellKey][k].merge(currentCell);
+                                hasMoved = true;
+                            } else if (!nextCell.isEmpty && nextCellKey - 1 != i) {
+                                this.field[nextCellKey - 1][k].merge(currentCell);
+                                hasMoved = true;
+                            }
+                           
+                
+                            break;
+                        } 
+                    nextCellKey++;
+                    nextCell = this.field[nextCellKey][k];
+                }
+            }
+        }
+
+        if (hasMoved) {
+            this.spawnUnit();
+        }
+        
+    }
+
+    isLastKey(key) {
+        return key == (this.size - 1);
+        }
+
+    isFirstKey(key) {
+        return key == 0;
+    }
 }
